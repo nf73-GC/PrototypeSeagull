@@ -1,37 +1,36 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float speed = 100.0f;
+    [SerializeField] private float speed = 10.0f;
+    [SerializeField] private float jump_force = 500.0f;
 
     private Rigidbody rb;
 
 
     public ActionMap actions;
 
-    private void MoveInDir(InputAction.CallbackContext context)
-    {
-        Vector3 t = context.ReadValue<Vector3>();
-        rb.AddForce(t);
-    }
-
     private void Awake()
     {
         actions = new ActionMap();
     }
-
+    
+    private void Jump(InputAction.CallbackContext context)
+    {
+        rb.AddForce(new Vector3(0, jump_force, 0));
+    }
     private void OnEnable()
     {
         actions.Player.Enable();
 
-        actions.Player.MoveForward.performed += MoveInDir;
+        actions.Player.Jump.performed += Jump;
     }
 
     private void OnDisable()
     {
-        actions.Player.MoveForward.performed -= MoveInDir;
-
         actions.Player.Disable();
     }
 

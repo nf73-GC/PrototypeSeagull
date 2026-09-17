@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerControl : MonoBehaviour
 {
-    [SerializeField] public GameObject  camera;
+   // [SerializeField] public GameObject  camera;
 
         private float xRotation = 0f;
         private float yRotation = 0f;
@@ -37,7 +37,7 @@ public class PlayerControl : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         transform.localRotation = Quaternion.Euler(0, yRotation, 0f);
-        camera.transform.localRotation = Quaternion.Euler(xRotation,0, 0f);
+      //  camera.transform.localRotation = Quaternion.Euler(xRotation,0, 0f);
 
     }
     public void ForwardMovement(InputAction.CallbackContext context)

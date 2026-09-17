@@ -13,13 +13,6 @@ public class GroundDetector : MonoBehaviour
         script = owner.GetComponent<PlayerMovement>();
     }
 
-    void Update()
-    {
-        if (owner == null)
-            return;
-
-        transform.position = owner.transform.position + new Vector3(0, -1.4f, 0);
-    }
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.gameObject.name);

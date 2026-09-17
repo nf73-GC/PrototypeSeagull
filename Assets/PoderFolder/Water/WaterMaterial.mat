@@ -52,14 +52,18 @@ Material:
     m_Ints: []
     m_Floats:
     - _AngleOffset: 9.08
-    - _Density: 6
+    - _Density: 15
+    - _DepthColorScale: 9
+    - _DepthScale: 4
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Speed: 0.05
-    - _Thickness: 4
+    - _Thickness: 6
     - _VoronoiDistordSpeed: 0.5
     m_Colors:
     - _BaseColor: {r: 0.20465466, g: 0.41454142, b: 0.6886792, a: 1}
+    - _Deep: {r: 0.022516914, g: 0.14180171, b: 0.4339623, a: 1}
     - _FoamColor: {r: 0.70073867, g: 0.7984577, b: 0.8207547, a: 1}
+    - _Shallow: {r: 0.27429688, g: 0.8679245, b: 0.85030663, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

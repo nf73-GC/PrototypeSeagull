@@ -16,11 +16,12 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
 
     }
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
-            CaptureFishScrit cfs = collision.gameObject.GetComponent<CaptureFishScrit>();
+            CaptureFishScrit cfs = other.gameObject.GetComponent<CaptureFishScrit>();
 
             if (!cfs.HasFish())
                 return;

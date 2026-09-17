@@ -415,7 +415,7 @@ GameObject:
   - component: {fileID: 878257574}
   - component: {fileID: 878257573}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: beach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -595,6 +595,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 548528706447931076, guid: cc52c5b9b62159947a917a900f59b40b, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1224560929590880032, guid: cc52c5b9b62159947a917a900f59b40b, type: 3}
       propertyPath: m_LocalPosition.y
       value: 4.16
@@ -621,7 +625,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9085361686869704304, guid: cc52c5b9b62159947a917a900f59b40b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -39
+      value: -40.23
       objectReference: {fileID: 0}
     - target: {fileID: 9085361686869704304, guid: cc52c5b9b62159947a917a900f59b40b, type: 3}
       propertyPath: m_LocalPosition.z

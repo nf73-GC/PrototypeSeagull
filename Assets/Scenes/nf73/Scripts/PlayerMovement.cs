@@ -111,9 +111,6 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-
-        animator.Play("playerfly");
-        animator.Play("playerAnim");
     }
 
     // Update is called once per frame

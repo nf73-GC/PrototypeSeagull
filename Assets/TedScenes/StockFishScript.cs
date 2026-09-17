@@ -1,55 +1,50 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class StockFishScript : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    [SerializeField] public GameObject Shadow;
-    [SerializeField] public GameObject Body;
+    ActionMap actions;
+    private GameObject player;
     [SerializeField] public GameObject Canvas;
     [SerializeField] public Transform camTransform;
-    ActionMap actions;
-     private GameObject? player ;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         actions = new ActionMap();
-        
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-    public void SetFishBody(InputAction.CallbackContext context)
+    public void SetStockBody(InputAction.CallbackContext context)
     {
         if (player == null)
             return;
         else
         {
-            CaptureFishScrit cfs = player.gameObject.GetComponentInChildren<CaptureFishScrit>();
-            cfs.SetFishToAnchor(Body);
-            Body.SetActive(true);
-
-            Shadow.SetActive(false);
+            player.GetComponentInChildren<CaptureFishScrit>().fishInMouth = false;
+           
         }
+
     }
     private void OnEnable()
     {
         actions.Enable();
-        actions.Player.Fish.performed += SetFishBody;
+        actions.Player.Fish.performed += SetStockBody;
     }
     private void OnDisable()
     {
+        actions.Player.Fish.performed -= SetStockBody;
+    }
+        // Update is called once per frame
+        void Update()
+    {
         
     }
-    private void OnTriggerEnter(Collider other)
+     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
             CaptureFishScrit cfs = other.gameObject.GetComponentInChildren<CaptureFishScrit>();
 
-            if (cfs.HasFish())
+            if (!cfs.HasFish())
                 return;
 
             player = cfs.gameObject;
@@ -60,7 +55,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        player = null;  
+        player = null;
         Canvas.SetActive(false);
     }
 }

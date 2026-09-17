@@ -53,7 +53,7 @@
                     "expectedControlType": "Vector3",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false,
+                    "initialStateCheck": true,
                     "priority": 0
                 },
                 {
@@ -70,6 +70,16 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "373591c8-39c9-4e3c-a311-97ef17846a5d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "Fish",
+                    "type": "Button",
+                    "id": "e215e46e-a3fe-4165-8678-da9e3f997022",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -218,6 +228,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "CameraMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b3eb4790-a32f-4cd0-8d98-a90dd862b2a4",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fish",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

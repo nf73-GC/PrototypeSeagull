@@ -16,13 +16,19 @@ public class GroundDetector : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.gameObject.name);
-        script.on_ground = true;
+        if (other.tag == "Ground")
+        {
+            script.on_ground = true;
+        }
         script.TriggerFly();
     }
     private void OnTriggerStay(Collider other)
     {
         Debug.Log(other.gameObject.name);
-        script.on_ground = true;
+        if (other.tag == "Ground")
+        {
+            script.on_ground = true;
+        }
     }
     private void OnTriggerExit(Collider other)
     {

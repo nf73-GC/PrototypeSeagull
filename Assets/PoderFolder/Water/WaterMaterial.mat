@@ -64,9 +64,9 @@ Material:
     m_Ints: []
     m_Floats:
     - _AngleOffset: 9.08
-    - _Density: 25
-    - _DepthColorScale: 9
-    - _DepthScale: 4
+    - _Density: 15
+    - _DepthColorScale: 9.58
+    - _DepthScale: -3.85
     - _FoamSpeed: 0.01
     - _FoamWidth: 0.01
     - _NoiseImpact: 0.01
@@ -74,9 +74,9 @@ Material:
     - _OffsetNoise: 5.5
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Speed: 0.03
-    - _Thickness: 6
-    - _VoronoiDistordSpeed: 0.2
+    - _Speed: 0.29
+    - _Thickness: 4.12
+    - _VoronoiDistordSpeed: 0.4
     m_Colors:
     - _BaseColor: {r: 0.20465466, g: 0.41454142, b: 0.6886792, a: 1}
     - _Deep: {r: 0.022516914, g: 0.14180171, b: 0.4339623, a: 1}

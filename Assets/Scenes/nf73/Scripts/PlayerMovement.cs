@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
             animator.Play("playerAnim");
             rb.useGravity = true;
             transform.localRotation = Quaternion.Euler(0, yRotation, 0f);
+            rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
         }
         else
         {
@@ -136,6 +137,6 @@ public class PlayerMovement : MonoBehaviour
         if (!fly_mode)
             return;
 
-        rb.linearVelocity = transform.forward * speed * 4.0f;
+        rb.linearVelocity = transform.forward * speed * 3.0f;
     }
 }

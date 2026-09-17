@@ -8,32 +8,33 @@ using UnityEngine.Events;
 
 public class SDFTextureGeneratorExample : MonoBehaviour
 {
-	[SerializeField] Texture _sourceTexture = null;
-	[SerializeField] float _sourceValueThreshold = 0.5f;
-	[SerializeField] SDFTextureGenerator.DownSampling _downSampling = SDFTextureGenerator.DownSampling.None;
-	[SerializeField] SDFTextureGenerator.Precision _precision = SDFTextureGenerator.Precision._32;
+	[SerializeField] Texture depthMaskTexture;
+	[SerializeField] float sourceValueThreshold = 0.5f;
+    public Material waterMaterial;
+    [Range(0f, 1f)] public float threshold = 0.5f;
 
-	[Header("Output")]
-	[SerializeField] UnityEvent<RenderTexture> _sdfTextureEvent = null;
+    private SDFTextureGenerator _sdfGen;
 
-	SDFTextureGenerator _generator;
-
-
-	void OnEnable()
+	void onAwake()
 	{
-		_generator = new SDFTextureGenerator();
+		_sdfGen = new SDFTextureGenerator();
 	}
 
 
 	void OnDisable()
 	{
-		_generator.Release();
+		_sdfGen.Release();
+	}
+	void OnDestroy()
+	{
+		_sdfGen.Release();
 	}
 
 
 	void Update()
 	{
-		_generator.Update( _sourceTexture, _sourceValueThreshold, _downSampling, _precision );
-		_sdfTextureEvent.Invoke( _generator.sdfTexture );
+        if (depthMaskTexture == null || waterMaterial == null) return;
+        _sdfGen.Update(depthMaskTexture, sourceValueThreshold);
+		waterMaterial.SetTexture("_SDFTex", _sdfGen.sdfTexture);
 	}
 }

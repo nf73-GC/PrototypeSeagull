@@ -25,7 +25,7 @@ public class SDFTextureGenerator
 
 	public RenderTexture sdfTexture => _sdfTexture;
 
-	public enum DownSampling { None, Half, Quater }
+    public enum DownSampling { None, Half, Quater }
 	public enum Precision { _16, _32 }
 
 	static class ShaderIDs

@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
@@ -7,10 +8,14 @@ using static UnityEditor.SceneView;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public bool on_ground = true;
+    private bool fly_mode = false;
+
     [SerializeField] private float speed = 10.0f;
     [SerializeField] private float jump_force = 500.0f;
 
     [SerializeField] public GameObject cam;
+
     private float xRotation = 0f;
     private float yRotation = 0f;
     float sensitivity = 0.5f;
@@ -20,6 +25,24 @@ public class PlayerMovement : MonoBehaviour
 
     public ActionMap actions;
 
+
+    public void TriggerFly()
+    {
+        if(on_ground)
+        {
+            fly_mode = false;
+            animator.Play("playerAnim");
+            rb.useGravity = true;
+            transform.localRotation = Quaternion.Euler(0, yRotation, 0f);
+        }
+        else
+        {
+            fly_mode = true;
+            animator.Play("playerfly");
+            rb.useGravity = false;
+        }
+    }
+
     private void Awake()
     {
         actions = new ActionMap();
@@ -27,6 +50,16 @@ public class PlayerMovement : MonoBehaviour
     
     private void Jump(InputAction.CallbackContext context)
     {
+        if (fly_mode)
+            return;
+
+        if(on_ground == false) 
+        {
+            TriggerFly();
+            return;
+        }
+
+        on_ground = false;
         rb.AddForce(new Vector3(0, jump_force, 0));
     }
     public void CameraMove(InputAction.CallbackContext context)
@@ -40,14 +73,17 @@ public class PlayerMovement : MonoBehaviour
         const float maxRotX = 90.0f;
         xRotation = Mathf.Clamp(xRotation, minRotX, maxRotX);
 
-        transform.localRotation = Quaternion.Euler(0, yRotation, 0f);
+        if(!fly_mode)
+            transform.localRotation = Quaternion.Euler(0, yRotation, 0f);
+        else
+            transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
 
-        const float minDist = 2.0f;
+        const float minDist = 15.0f;
         const float maxDist = 15.0f;
 
         float ratio = (xRotation - minRotX) / (maxRotX - minRotX);
         float distFromCam = minDist + (maxDist - minDist) * ratio;
-        Debug.Log(distFromCam);
+
         Quaternion camRotation = Quaternion.Euler(xRotation, yRotation, 0f);
         Vector3 camPosition = transform.position +transform.forward * 5.0f - camRotation * Vector3.forward * distFromCam;
 
@@ -74,6 +110,9 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+
+        animator.Play("playerfly");
+        animator.Play("playerAnim");
     }
 
     // Update is called once per frame
@@ -84,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
         moveVal.Normalize();
         moveVal *= speed;
 
-        if(moveVal != Vector3.zero)
+        if(moveVal != Vector3.zero && !fly_mode)
         {
             //transform.Rotate(new Vector3(0, 20.0f * moveVal.x * Time.deltaTime, 0));
 
@@ -94,6 +133,9 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (!fly_mode)
+            return;
 
+        rb.linearVelocity = transform.forward * speed * 4.0f;
     }
 }

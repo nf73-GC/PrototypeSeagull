@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     float sensitivity = 0.5f;
 
     private Rigidbody rb;
-
+    private Animator animator;
 
     public ActionMap actions;
 
@@ -73,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
